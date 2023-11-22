@@ -11,14 +11,14 @@ const app = express();
 app.use(express.json());
 
 //Option 1: Allow All Origins w/ default of cors(*)
-app.use(cors());
+//app.use(cors());
 //Option 2: Use custom headers
-// app.use(
-//   cors({
-//     origin: "https://article-management-frontend.vercel.app",
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//   })
-// );
+app.use(
+  cors({
+    origin: "https://article-management-frontend.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 //GET Method for HomePage
 app.get("/", (request, response) => {
