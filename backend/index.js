@@ -17,7 +17,6 @@ app.use(
   cors({
     origin: "https://article-management-frontend.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type"],
   })
 );
 
