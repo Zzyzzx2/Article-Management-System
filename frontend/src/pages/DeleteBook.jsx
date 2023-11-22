@@ -12,11 +12,11 @@ const DeleteBook = () => {
   const handleDeleteBook = () => {
     setLoading(true);
     axios
-      .delete(`http://localhost:5555/books/${id}`)
+      .delete(`https://article-management-api.vercel.app/books/${id}`)
       .then(() => {
         setLoading(false);
         alert("Successfully Deleted Book!");
-        navigate("/");
+        navigate("https://article-management-frontend.vercel.app/");
       })
       .catch((err) => {
         setLoading(false);

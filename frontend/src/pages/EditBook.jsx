@@ -14,7 +14,7 @@ const EditBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/books/${id}`)
+      .get(`https://article-management-api.vercel.app/books/${id}`)
       .then((response) => {
         setAuthor(response.data.author);
         setTitle(response.data.title);
@@ -36,17 +36,17 @@ const EditBook = () => {
     };
     setLoading(true);
     axios
-      .put(`http://localhost:5555/books/${id}`, data)
+      .put(`https://article-management-api.vercel.app/books/${id}`, data)
       .then(() => {
         setLoading(false);
 
         // enqueueSnackbar("Book Created successfully", { variant: "success" });
-        navigate("/");
+        navigate("https://article-management-frontend.vercel.app/");
         alert("Book Successfully Edited!");
       })
       .catch((error) => {
         setLoading(false);
-        alert("An error happened. Please Chack console");
+        alert("An error happened. Please Check console");
         // enqueueSnackbar("Error", { variant: "error" });
         console.log(error);
       });
