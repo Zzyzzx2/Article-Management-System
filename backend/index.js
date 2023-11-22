@@ -4,7 +4,7 @@ import { Book } from "./models/bookModel.js";
 import bookRoutes from "./routes/bookRoutes.js";
 import cors from "cors";
 
-PORT = process.env.PORT || 5555;
+const PORT = process.env.PORT || 5555;
 const mongoDBURL = process.env.MONGODB_URL || mongoDBURL;
 const app = express();
 
