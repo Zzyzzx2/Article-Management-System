@@ -28,15 +28,15 @@ app.get("/", (request, response) => {
   return response.status(234).send("Welcome to Book");
 });
 
-// app.use("/books", bookRoutes);
-// mongoose
-//   .connect(mongoDBURL)
-//   .then(() => {
-//     console.log("App connected to database");
-//     app.listen(PORT, () => {
-//       console.log(`App is listening to port ${PORT}`);
-//     });
-//   })
-//   .catch((e) => {
-//     console.log(e);
-//   });
+app.use("/books", bookRoutes);
+mongoose
+  .connect(mongoDBURL)
+  .then(() => {
+    console.log("App connected to database");
+    app.listen(PORT, () => {
+      console.log(`App is listening to port ${PORT}`);
+    });
+  })
+  .catch((e) => {
+    console.log(e);
+  });
