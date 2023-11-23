@@ -19,7 +19,7 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://article-management-api.vercel.app/books")
+      .get("https://article-management-api.vercel.app/")
       .then((response) => {
         setBooks(response.data.data);
         setLoading(false);
