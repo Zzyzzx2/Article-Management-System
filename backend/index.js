@@ -4,6 +4,7 @@ import { Book } from "./models/bookModel.js";
 import bookRoutes from "./routes/bookRoutes.js";
 import cors from "cors";
 import "dotenv/config";
+import router from "./routes/bookRoutes.js";
 
 const PORT = process.env.PORT || 5555;
 const mongoDBURL = process.env.MONGODBURL;
@@ -25,10 +26,11 @@ app.use(cors());
 //GET Method for HomePage
 app.get("/", (request, response) => {
   console.log(request);
-  return response.status(234).send("Welcome to Book");
+  return response.status(234).send("Article management System");
 });
 
-app.use("/books", bookRoutes);
+app.use("/books", router);
+
 mongoose
   .connect(mongoDBURL)
   .then(() => {
