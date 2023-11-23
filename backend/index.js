@@ -5,7 +5,7 @@ import bookRoutes from "./routes/bookRoutes.js";
 import cors from "cors";
 
 const PORT = process.env.PORT || 5555;
-const mongoDBURL = process.env.MONGODB_URL || mongoDBURL;
+const mongoDBURL = process.env.MONGODB_URL;
 const app = express();
 
 //Middleware for parsing data
