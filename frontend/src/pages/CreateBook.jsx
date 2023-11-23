@@ -19,7 +19,7 @@ const CreateBook = () => {
     };
     setLoading(true);
     axios
-      .post("https://article-management-api.vercel.app/books", data)
+      .post("https://article-management-api.vercel.app/books/", data)
       .then(() => {
         setLoading(false);
 
