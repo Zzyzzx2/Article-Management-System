@@ -7,6 +7,7 @@ import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import BooksTable from "../Components/home/BooksTable";
 import BooksCard from "../Components/home/BooksCard";
+import { backendUrl } from "../config";
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState([]);
@@ -19,7 +20,7 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://article-management-api.vercel.app/books/")
+      .get(`${backendUrl}/books/`)
       .then((response) => {
         setBooks(response.data.data);
         setLoading(false);

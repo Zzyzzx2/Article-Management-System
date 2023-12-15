@@ -3,22 +3,25 @@ import BackButton from "../Components/BackButton";
 import Spinner from "../Components/Spinner";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { backendUrl } from "../config";
 
 const EditBook = () => {
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
   const [author, setAuthor] = useState("");
   const [publishYear, setPublishYear] = useState("");
+  const [moreInfo, setMoreInfo] = useState("No Info");
 
   const { id } = useParams();
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://article-management-api.vercel.app/books/${id}`)
+      .get(`${backendUrl}/books/${id}`)
       .then((response) => {
         setAuthor(response.data.author);
         setTitle(response.data.title);
         setPublishYear(response.data.publishYear);
+        setMoreInfo(response.data.moreInfo);
         setLoading(false);
       })
       .catch((err) => {
@@ -33,15 +36,16 @@ const EditBook = () => {
       title,
       author,
       publishYear,
+      moreInfo,
     };
     setLoading(true);
     axios
-      .put(`https://article-management-api.vercel.app/books/${id}`, data)
+      .put(`${backendUrl}/books/${id}`, data)
       .then(() => {
         setLoading(false);
 
         // enqueueSnackbar("Book Created successfully", { variant: "success" });
-        navigate("https://article-management-frontend.vercel.app/");
+        navigate("/");
         alert("Book Successfully Edited!");
       })
       .catch((error) => {
@@ -81,6 +85,14 @@ const EditBook = () => {
             type="number"
             value={publishYear}
             onChange={(e) => setPublishYear(e.target.value)}
+            className="border-2 border-gray-500 px-4 py-2  w-full "
+          />
+        </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">More Info</label>
+          <textarea
+            value={moreInfo}
+            onChange={(e) => setMoreInfo(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2  w-full "
           />
         </div>

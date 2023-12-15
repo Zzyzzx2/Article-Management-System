@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import BackButton from "../Components/BackButton";
 import Spinner from "../Components/Spinner";
+import { backendUrl } from "../config";
 
 const ShowBook = () => {
   const [book, setBook] = useState([]);
@@ -12,7 +13,7 @@ const ShowBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://article-management-api.vercel.app/books/${id}`)
+      .get(`${backendUrl}/books/${id}`)
       .then((response) => {
         setBook(response.data);
         setLoading(false);
@@ -53,6 +54,10 @@ const ShowBook = () => {
           <div className="my-4">
             <span className="text-xl mr-4 text-gray-500">Last Update Time</span>
             <span>{new Date(book.updatedAt).toString()}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">More Info</span>
+            <span>{book.moreInfo}</span>
           </div>
         </div>
       )}

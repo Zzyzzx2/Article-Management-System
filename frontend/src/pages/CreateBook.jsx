@@ -3,12 +3,14 @@ import BackButton from "../Components/BackButton";
 import Spinner from "../Components/Spinner";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { backendUrl } from "../config";
 
 const CreateBook = () => {
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
   const [author, setAuthor] = useState("");
   const [publishYear, setPublishYear] = useState("");
+  const [moreInfo, setMoreInfo] = useState("No Info");
 
   const navigate = useNavigate();
   const handleSaveBook = () => {
@@ -16,15 +18,16 @@ const CreateBook = () => {
       title,
       author,
       publishYear,
+      moreInfo,
     };
     setLoading(true);
     axios
-      .post("https://article-management-api.vercel.app/books/", data)
+      .post(`${backendUrl}/books/`, data)
       .then(() => {
         setLoading(false);
 
         // enqueueSnackbar("Book Created successfully", { variant: "success" });
-        navigate("https://article-management-frontend.vercel.app/");
+        navigate("/");
         alert("Book Successfully created!");
       })
       .catch((error) => {
@@ -64,6 +67,15 @@ const CreateBook = () => {
             type="number"
             value={publishYear}
             onChange={(e) => setPublishYear(e.target.value)}
+            className="border-2 border-gray-500 px-4 py-2  w-full "
+          />
+        </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">More Info</label>
+          <textarea
+            type="text"
+            value={moreInfo}
+            onChange={(e) => setMoreInfo(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2  w-full "
           />
         </div>

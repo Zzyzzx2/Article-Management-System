@@ -3,6 +3,7 @@ import BackButton from "../Components/BackButton";
 import Spinner from "../Components/Spinner";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { backendUrl } from "../config";
 
 const DeleteBook = () => {
   const [loading, setLoading] = useState(false);
@@ -12,11 +13,11 @@ const DeleteBook = () => {
   const handleDeleteBook = () => {
     setLoading(true);
     axios
-      .delete(`https://article-management-api.vercel.app/books/${id}`)
+      .delete(`${backendUrl}/books/${id}`)
       .then(() => {
         setLoading(false);
         alert("Successfully Deleted Book!");
-        navigate("https://article-management-frontend.vercel.app/");
+        navigate("/");
       })
       .catch((err) => {
         setLoading(false);
