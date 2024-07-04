@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { Book } from "./models/bookModel.js";
 import bookRoutes from "./routes/bookRoutes.js";
+import authrouter from "./routes/auth.js";
 import cors from "cors";
 import "dotenv/config";
 import router from "./routes/bookRoutes.js";
@@ -26,10 +27,23 @@ app.use(cors());
 //GET Method for HomePage
 app.get("/", (request, response) => {
   console.log(request);
-  return response.status(234).send("Article management System");
+  return response.status(234).send("Book management System");
 });
 
 app.use("/books", router);
+app.use("/auth", authrouter);
+
+// Search
+app.get("/api/books/search/:title", async (req, res) => {
+  const { title } = req.params;
+  console.log("Search for: " + title);
+  try {
+    const books = await Book.find({ title: new RegExp(title, "i") }); // Adjust based on your database query method
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 mongoose
   .connect(mongoDBURL)
