@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Spinner from "../Components/Spinner";
+import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
-import { AiOutlineEdit } from "react-icons/ai";
-import { BsInfoCircle } from "react-icons/bs";
-import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
-import BooksTable from "../Components/home/BooksTable";
-import BooksCard from "../Components/home/BooksCard";
+import { MdOutlineAddBox } from "react-icons/md";
+import BooksTable from "../components/home/BooksTable";
+import BooksCard from "../components/home/BooksCard";
+import Title from "../components/home/Title";
 import { backendUrl } from "../config";
+import SearchBar from "../components/SearchBar";
+
 const Home = () => {
   const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState([]);
-  const [showType, setShowType] = useState(() => {
-    const localValue = localStorage.getItem("ShowType");
-    if (localValue === null) return [];
-    return JSON.parse(localValue);
-  });
+  const [filteredBooks, setFilteredBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showType, setShowType] = useState(
+    JSON.parse(localStorage.getItem("ShowType")) || "table"
+  );
 
   useEffect(() => {
-    setLoading(true);
     axios
       .get(`${backendUrl}/books/`)
       .then((response) => {
         setBooks(response.data.data);
+        setFilteredBooks(response.data.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -33,14 +33,26 @@ const Home = () => {
 
   useEffect(() => {
     localStorage.setItem("ShowType", JSON.stringify(showType));
-    if (showType === "" || showType === "table") {
-      setShowType("table");
-    } else setShowType("card");
   }, [showType]);
 
+  const handleSearch = (query) => {
+    if (query.trim() === "") {
+      setFilteredBooks(books);
+    } else {
+      const filtered = books.filter((book) =>
+        book.title.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredBooks(filtered);
+    }
+  };
+
   return (
-    <div className="p-4">
-      <div className="flex justify-center items-center gap-x-4">
+    <div className="p-4 pt-20">
+      <Title />
+      <div className="flex flex-col items-center mt-8 w-full">
+        <SearchBar onSearch={handleSearch} />
+      </div>
+      <div className="flex justify-center items-center gap-x-4 mt-4">
         <button
           className="bg-sky-400 hover:bg-sky-200 px-4 py-1 rounded-lg"
           onClick={() => setShowType("table")}
@@ -54,9 +66,8 @@ const Home = () => {
           Card
         </button>
       </div>
-      <div className="flex justify-center items-center gap-x-4"></div>
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl my-8">Books List</h1>
+      <div className="flex justify-between items-center mt-8">
+        <h1 className="text-3xl">Books List</h1>
         <Link to="/books/create">
           <MdOutlineAddBox className="text-sky-800 text-4xl" />
         </Link>
@@ -64,9 +75,9 @@ const Home = () => {
       {loading ? (
         <Spinner />
       ) : showType === "table" ? (
-        <BooksTable books={books} />
+        <BooksTable books={filteredBooks} />
       ) : (
-        <BooksCard books={books} />
+        <BooksCard books={filteredBooks} />
       )}
     </div>
   );

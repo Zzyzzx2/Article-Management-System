@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import BackButton from "../Components/BackButton";
-import Spinner from "../Components/Spinner";
+import BackButton from "../components/BackButton";
+import Spinner from "../components/Spinner";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { backendUrl } from "../config";
+import { toast } from "react-toastify";
 
 const CreateBook = () => {
   const [title, setTitle] = useState("");
@@ -28,11 +29,11 @@ const CreateBook = () => {
 
         // enqueueSnackbar("Book Created successfully", { variant: "success" });
         navigate("/");
-        alert("Book Successfully created!");
+        toast.success("Book Successfully created!");
       })
       .catch((error) => {
         setLoading(false);
-        alert("An error happened. Please Check console");
+        toast.error("An error happened. Please Check console");
         // enqueueSnackbar("Error", { variant: "error" });
         console.log(error);
       });

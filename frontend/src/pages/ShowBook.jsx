@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import BackButton from "../Components/BackButton";
-import Spinner from "../Components/Spinner";
+import BackButton from "../components/BackButton";
+import Spinner from "../components/Spinner";
 import { backendUrl } from "../config";
 
 const ShowBook = () => {

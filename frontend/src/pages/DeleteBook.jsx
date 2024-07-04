@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import BackButton from "../Components/BackButton";
-import Spinner from "../Components/Spinner";
+import BackButton from "../components/BackButton";
+import Spinner from "../components/Spinner";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { backendUrl } from "../config";
+import { toast } from "react-toastify";
 
 const DeleteBook = () => {
   const [loading, setLoading] = useState(false);
@@ -16,12 +17,12 @@ const DeleteBook = () => {
       .delete(`${backendUrl}/books/${id}`)
       .then(() => {
         setLoading(false);
-        alert("Successfully Deleted Book!");
+        toast.success("Successfully Deleted Book!");
         navigate("/");
       })
       .catch((err) => {
         setLoading(false);
-        alert("An error happened. Please Check Console");
+        toast.error("An error happened. Please Check Console");
         console.log(err);
       });
   };
