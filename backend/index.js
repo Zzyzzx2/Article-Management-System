@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 
 //Option 1: Allow All Origins w/ default of cors(*)
-app.use(cors());
+// app.use(cors());
 //Option 2: Use custom headers
 // app.use(
 //   cors({
