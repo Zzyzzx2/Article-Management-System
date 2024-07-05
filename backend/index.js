@@ -6,6 +6,7 @@ import authrouter from "./routes/auth.js";
 import cors from "cors";
 import "dotenv/config";
 import router from "./routes/bookRoutes.js";
+import airouter from "./routes/ai.js";
 
 const PORT = process.env.PORT || 5555;
 const mongoDBURL = process.env.MONGODBURL;
@@ -32,7 +33,7 @@ app.get("/", (request, response) => {
 
 app.use("/books", router);
 app.use("/auth", authrouter);
-
+app.use("/ai", airouter);
 // Search
 app.get("/api/books/search/:title", async (req, res) => {
   const { title } = req.params;
