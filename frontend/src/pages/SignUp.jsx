@@ -23,7 +23,7 @@ const SignUp = () => {
   };
 
   const validatePassword = (password) => {
-    const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,}$/;
+    const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{7,}$/;
     return regex.test(password);
   };
 
@@ -37,7 +37,7 @@ const SignUp = () => {
     }
     if (!validatePassword(userData.password)) {
       setErrors(
-        "Password must be at least 10 characters long and include at least one number and one special character"
+        "Password must be at least 7 characters long and include at least one number and one special character"
       );
       return;
     }
@@ -47,8 +47,8 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500">
-      {/* <HomeTitle /> */}
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500 pt-20">
+      <HomeTitle />
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-bold mb-4 text-center">Sign Up</h2>
         {errors && <p className="text-red-500 mb-4">{errors}</p>}

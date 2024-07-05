@@ -30,8 +30,9 @@ export const loginUser = (userData, navigate) => async (dispatch) => {
     toast.success("Login successful!");
     navigate("/"); // Redirect to home page after login
   } catch (error) {
+    const errorMessage = error.response?.data?.error || error.message;
     console.error("Login failed:", error);
-    toast.error("Login failed. Please try again.");
+    toast.error(`Login failed. ${errorMessage}`);
   }
 };
 
@@ -44,8 +45,9 @@ export const signupUser = (userData, navigate) => async (dispatch) => {
     toast.success("Signup successful! Please login.");
     navigate("/login"); // Redirect to login page after signup
   } catch (error) {
-    dispatch({ type: SIGNUP_FAILURE, payload: error.message });
-    toast.error("Signup failed. Please try again.");
+    const errorMessage = error.response?.data?.error || error.message;
+    dispatch({ type: SIGNUP_FAILURE, payload: errorMessage });
+    toast.error(`Signup failed. ${errorMessage}`);
   }
 };
 

@@ -31,7 +31,7 @@ const CreateBook = () => {
       title,
       author,
       publishYear,
-      moreInfo: quillRef.current.querySelector(".ql-editor").innerHTML, // Getting the HTML content from Quill
+      moreInfo: quillRef.current.querySelector(".ql-editor").innerText, // Getting the HTML content from Quill
     };
     setLoading(true);
     axios
