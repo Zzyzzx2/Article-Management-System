@@ -12,19 +12,33 @@ const generateToken = (user) => {
 const registerUser = async (req, res) => {
   console.log("Registering: ");
   const { firstname, lastname, email, password } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const user = new User({
-    firstname,
-    lastname,
-    email,
-    password: hashedPassword,
-  });
 
   try {
+    // Check if the user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: "User already exists" });
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user
+    const user = new User({
+      firstname,
+      lastname,
+      email,
+      password: hashedPassword,
+    });
+
+    // Save the user
     await user.save();
+
+    // Generate a token and respond
     res.status(201).json({ token: generateToken(user) });
   } catch (error) {
-    res.status(400).json({ error: "User already exists" });
+    console.error("Error registering user:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
