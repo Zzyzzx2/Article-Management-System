@@ -56,7 +56,7 @@ const ShowBook = () => {
             <span>{new Date(book.updatedAt).toString()}</span>
           </div>
           <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">More Info</span>
+            <span className="text-xl mr-4 text-gray-500">Content</span>
             <span>{book.moreInfo}</span>
           </div>
         </div>
