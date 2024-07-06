@@ -18,7 +18,7 @@ const SearchBar = ({ onSearch }) => {
         type="text"
         value={query}
         onChange={handleChange}
-        placeholder="Search for books..."
+        placeholder="Search for a thought..."
         className="w-4/5 p-2 border border-gray-300 rounded mt-1"
       />
       <button

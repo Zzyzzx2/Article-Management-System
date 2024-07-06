@@ -12,10 +12,10 @@ function BooksTable({ books }) {
           <th className="border border-slate-600 rounded-md">No</th>
           <th className="border border-slate-600 rounded-md">Title</th>
           <th className="border border-slate-600 rounded-md max-md:hidden">
-            Author
+            Thinker
           </th>
           <th className="border border-slate-600 rounded-md max-md:hidden">
-            Publish Year
+            Year
           </th>
           <th className="border border-slate-600 rounded-md">Operations</th>
         </tr>

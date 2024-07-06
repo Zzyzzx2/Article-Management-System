@@ -16,7 +16,6 @@ const Home = () => {
   const [showType, setShowType] = useState(
     JSON.parse(localStorage.getItem("ShowType")) || "table"
   );
-
   useEffect(() => {
     axios
       .get(`${backendUrl}/books/`)
@@ -67,7 +66,7 @@ const Home = () => {
         </button>
       </div>
       <div className="flex justify-between items-center mt-8">
-        <h1 className="text-3xl">Books List</h1>
+        <h1 className="text-3xl"></h1>
         <Link to="/books/create">
           <MdOutlineAddBox className="text-sky-800 text-4xl" />
         </Link>

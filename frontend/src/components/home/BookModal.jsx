@@ -28,8 +28,8 @@ const BookModal = ({ book, onClose }) => {
           <BiUserCircle className="text-red-300 text-2xl" />
           <h2 className="my-1">{book.author}</h2>
         </div>
-        <p className="mt-4">More Info</p>
-        <p className="my-2">{book.moreInfo ? book.moreInfo : "No info"}</p>
+        <p className="mt-4">Content</p>
+        <p className="my-2">{book.moreInfo ? book.moreInfo : "Nothing much"}</p>
       </div>
     </div>
   );
