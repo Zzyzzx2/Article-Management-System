@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../actions/auth";
 import { useNavigate } from "react-router-dom";
-import HomeTitle from "../Components/home/HomeTitle";
+import HomeTitle from "../components/home/HomeTitle";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
